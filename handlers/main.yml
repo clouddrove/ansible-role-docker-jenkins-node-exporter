@@ -1,0 +1,20 @@
+---
+# handlers for ansible-role-docker-jenkins_exporter
+
+- name: restart jenkins_exporter
+  service:
+    name: jenkins_exporter
+    state: restarted
+    enabled: true
+
+- name: start jenkins_exporter
+  service:
+    name: jenkins_exporter
+    state: started
+    enabled: true
+
+- name: reload jenkins_exporter
+  service:
+    name: jenkins_exporter
+    state: reloaded
+    enabled: true

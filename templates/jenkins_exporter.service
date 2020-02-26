@@ -1,0 +1,10 @@
+[Unit]
+Description=jenkins exporter Server
+
+[Service]
+TimeoutStartSec=0
+Restart=always
+ExecStart=/usr/local/bin/jenkins_exporter
+
+[Install]
+WantedBy=multi-user.target

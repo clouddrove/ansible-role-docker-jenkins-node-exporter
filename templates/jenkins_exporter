@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+set -eux -o pipefail
+
+# pull the image before so we dont first remove the container and then pull
+docker pull tboerger/jenkins-exporter:"{{ jenkins_exporter_version }}"
+
+docker rm -f -v jenkins_exporter || :
+
+docker run --rm --name=jenkins_exporter \
+	-p 9103:"{{ jenkins_exporter_server_port }}" \
+   tboerger/jenkins-exporter:"{{ jenkins_exporter_version }}" -jenkins.address='{{ jenkins_address }}' -jenkins.password='{{ jenkins_pass }}' -jenkins.username='{{ jenkins_user }}'

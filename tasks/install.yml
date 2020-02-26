@@ -1,0 +1,32 @@
+---
+
+- name: copy jenkins exporter script
+  template:
+    src: "jenkins_exporter"
+    dest: /usr/local/bin/jenkins_exporter
+    mode: 0755
+    owner: root
+    group: root
+
+- name: copy jenkins exporter script
+  template:
+    src: "jenkins_exporter.service"
+    dest: /etc/systemd/system/jenkins_exporter.service
+    mode: 0644
+    owner: root
+    group: root
+
+- name: restart jenkins exporter service is restarted
+  service:
+    name: jenkins_exporter
+    state: restarted
+  changed_when: false
+
+- name: wait for jenkins exporter to become ready
+  wait_for:
+    host: "{{ jenkins_exporter_server_bind }}"
+    port: "{{ jenkins_exporter_server_port }}"
+    state: started
+    delay: 5
+    connect_timeout: 15
+    timeout: 300

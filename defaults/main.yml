@@ -1,0 +1,12 @@
+---
+
+# Networking/connection options
+jenkins_exporter_server_port: 9103
+jenkins_exporter_server_bind: 0.0.0.0
+
+jenkins_exporter_server_password: false
+
+jenkins_exporter_version: latest
+jenkins_address: "{{ PrivateIp }}"
+jenkins_user: ""
+jenkins_pass: ""
